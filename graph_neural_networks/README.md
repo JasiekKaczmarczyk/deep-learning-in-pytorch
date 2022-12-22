@@ -1,4 +1,4 @@
-# Cycle GAN
+# GNN Classifier
 Implementation of Simple Graph Neural Network Classifier for ModelNet10 Dataset (https://modelnet.cs.princeton.edu/)
 
 ## Architecture
