@@ -1,6 +1,7 @@
 # Neural Ordinary Differential Equations for MNIST Classification
 Implementation of WaveNet model along with its extention to model MIDI sequences
 
+## Citations
 ```bibtex
 @article{chen2018,
     title  = {Neural Ordinary Differential Equations},

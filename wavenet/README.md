@@ -27,7 +27,7 @@ x = torch.randn((1, 1024))
 y = model(x)
 
 ```
-
+## Citations
 ```bibtex
 @article{vandenoord2016,
     title  = {WaveNet: A Generative Model for Raw Audio},

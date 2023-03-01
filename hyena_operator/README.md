@@ -11,7 +11,7 @@ hyena = HyenaOperator(embedding_size=128, order=4, window_scaling_factor=0.1, wi
 x = torch.randn((1, 4096, 128))
 y = hyena(x)
 ```
-
+## Citations
 ```bibtex
 @article{poli2023,
     title  = {Hyena Hierarchy: Towards Larger Convolutional Language Models},
