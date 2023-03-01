@@ -7,5 +7,6 @@ This repository contains code for my projects made using PyTorch
 - [Diffusion Model](diffusion_model/)
 - [GNN Mesh Classifier](graph_neural_networks/)
 - [Neural ODE for MNIST Classification](neural_ode_mnist_classification/)
-- [WaveNet](wavenet)
+- [WaveNet](wavenet/)
+- [GPT](gpt/)
 - [Brain Tumor Classification](brain_tumor_classification/)

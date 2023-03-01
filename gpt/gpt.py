@@ -68,6 +68,15 @@ class MultiHeadAttention(nn.Module):
 
 class TransformerBlock(nn.Module):
     def __init__(self, embedding_size: int, heads: int, ffn_expansion: int, dropout_rate: float = 0.3):
+        """
+        Transformer Block
+
+        Args:
+            embedding_size (int): size of embedding dim
+            heads (int): number of attention heads
+            ffn_expansion (int): scaling factor for hidden dim expansion in feed forward layer
+            dropout_rate (float, optional): dropout rate. Defaults to 0.3.
+        """
         super().__init__()
 
         # expanded dimension for feed forward
@@ -153,6 +162,18 @@ class PositionalEncoding1D(nn.Module):
 
 class GPT(nn.Module):
     def __init__(self, embedding_size: int, seq_len: int, out_classes: int, num_blocks: int, heads: int, ffn_expansion: int, dropout_rate: float = 0.3):
+        """
+        GPT-1 Architecture
+
+        Args:
+            embedding_size (int): size of embedding dim
+            seq_len (int): length of input sequence, used to construct mask
+            out_classes (int): number of output classes
+            num_blocks (int): number of transformer decoder blocks
+            heads (int): number of attention heads in each block
+            ffn_expansion (int): scaling factor for hidden dim expansion in feed forward layer
+            dropout_rate (float, optional): dropout rate. Defaults to 0.3.
+        """
         super().__init__()
         self.pos_enc = PositionalEncoding1D(embedding_size)
 
