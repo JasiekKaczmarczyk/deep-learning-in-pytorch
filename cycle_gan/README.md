@@ -1,9 +1,7 @@
 # Cycle GAN
-Implementation of Cycle GAN
+Implementation of Cycle GAN trained to generate Monet style painting based on input photo
 
-## Architecture
-Aside from ResNet Blocks in generator which are inspired by PixelCNN's Gated Residual Blocks implementation should be identical to the one in the paper.
-
+## Citations
 ```bibtex
 @article{zhu2017,
     title  = {Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks},
