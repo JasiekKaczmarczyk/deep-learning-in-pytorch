@@ -7,6 +7,8 @@ class ForwardDiffusionModule(nn.Module):
     def __init__(self, num_steps: int, beta_start: float, beta_end: float, schedule_type: str = "linear"):
         super().__init__()
 
+        self.num_steps = num_steps
+
         betas = self.beta_schedule(beta_start, beta_end, num_steps, schedule_type)
         alphas = 1 - betas
         alphas_hat = torch.cumprod(alphas, dim=0)

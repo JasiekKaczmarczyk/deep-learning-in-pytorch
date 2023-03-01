@@ -5,13 +5,16 @@ import torchvision.transforms as T
 from tqdm import tqdm
 
 
-class DiffusionModel:
+class DiffusionModel(nn.Module):
     def __init__(self, forward_diffusion_model: nn.Module, reverse_diffusion_model: nn.Module):
         super().__init__()
 
         self.forward_diffusion_model = forward_diffusion_model
         self.reverse_diffusion_model = reverse_diffusion_model
         self.num_steps = forward_diffusion_model.num_steps
+
+    def forward(self, x: torch.Tensor):
+        return self.sample(x)
 
     def save(self, filepath="diffusion_model.pt"):
         torch.save(
@@ -23,7 +26,7 @@ class DiffusionModel:
         )
 
     @property
-    def load(self, filepath="diffusion_model.pt"):
+    def load(filepath="diffusion_model.pt"):
         loaded = torch.load(filepath)
 
         return DiffusionModel(loaded["forward_diffusion_model"], loaded["reverse_diffusion_model"])
