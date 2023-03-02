@@ -10,3 +10,4 @@ This repository contains code for my projects made using PyTorch
 - [WaveNet](wavenet/)
 - [GPT](gpt/)
 - [Brain Tumor Classification](brain_tumor_classification/)
+- [Hyena Operator](hyena_operator/)
