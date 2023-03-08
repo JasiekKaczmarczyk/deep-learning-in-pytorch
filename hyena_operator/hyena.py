@@ -76,27 +76,23 @@ class PositionalEncoding1D(nn.Module):
         return pe
 
 class WindowFunc(nn.Module):
-    def __init__(self, scaling_factor: float, bias: float):
+    def __init__(self, order: int):
         """
-        Window function applied to conv filters
+        Window Function
 
         Args:
-            scaling_factor (float): slope of window
-            bias (float): additional bias term
+            order (int): hyena order
         """
         super().__init__()
 
-        self.scaling_factor = scaling_factor
-        self.bias = bias
+        self.register_buffer("alpha", torch.rand(order, 1, 1))
 
     def forward(self, x: torch.Tensor):
-        _, seq_len, _ = x.shape
-
-        position = torch.arange(seq_len, device=x.device).float()
-        return torch.exp(-self.scaling_factor * position + self.bias)
+        position = torch.arange(x.shape[0], device=x.device)
+        return torch.exp(-self.alpha * position + 0.01)
 
 class HyenaFilter(nn.Module):
-    def __init__(self, embedding_size: int, order: int, window_scaling_factor: float, window_bias: float):
+    def __init__(self, embedding_size: int, order: int):
         """
         Hyena Filter layer: generates implicit convolution filters for hyena operator
 
@@ -112,7 +108,7 @@ class HyenaFilter(nn.Module):
 
         self.positional_encoding = PositionalEncoding1D(embedding_size)
         self.filter_proj = nn.Linear(embedding_size, order*embedding_size)
-        self.window = WindowFunc(window_scaling_factor, window_bias)
+        self.window = WindowFunc(order)
 
     def forward(self, x: torch.Tensor):
         # generating positional encodings
@@ -125,12 +121,12 @@ class HyenaFilter(nn.Module):
         h_hat = einops.rearrange(h_hat, "l (o e) -> o e l", o=self.order)
 
         # applying window function
-        h = h_hat * self.window(x)
+        h = h_hat * self.window(pe)
 
         return h
 
 class HyenaOperator(nn.Module):
-    def __init__(self, embedding_size: int, order: int, window_scaling_factor: float, window_bias: float, causal: bool = False):
+    def __init__(self, embedding_size: int, order: int, causal: bool = False):
         """
         Hyena Operator: applies Hyena Operator to input sequence
 
@@ -146,13 +142,11 @@ class HyenaOperator(nn.Module):
         self.embedding_size = embedding_size
         self.order = order
 
-        self.window_scaling_factor = window_scaling_factor
-        self.window_bias = window_bias
         self.causal = causal
 
         # projection of data to gates and value
         self.data_proj = HyenaProjection(embedding_size, order)
-        self.filter_proj = HyenaFilter(embedding_size, order, window_scaling_factor, window_bias)
+        self.filter_proj = HyenaFilter(embedding_size, order)
 
     def forward(self, x: torch.Tensor):
         _, seq_len, _ = x.shape
@@ -180,8 +174,3 @@ class HyenaOperator(nn.Module):
         out = einops.rearrange(value, "b e l -> b l e")
 
         return out
-
-
-
-
-
