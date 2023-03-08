@@ -1,5 +1,5 @@
 # Neural Ordinary Differential Equations for MNIST Classification
-Implementation of WaveNet model along with its extention to model MIDI sequences
+Building MNIST Classifier with Neural Ordinary Differential Equations using TorchDyn library. Neural ODE layer is trained to find vector field to separate different classes. I think NODEs are very interesting application of neural networks. 
 
 ## Citations
 ```bibtex
