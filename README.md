@@ -18,4 +18,6 @@ This repository contains code for my projects made using PyTorch
 - [Brain Tumor Classification](brain_tumor_classification/)
     - Brain Tumor Classification project using pretrained EfficientNetB4 as feature extractor and training classifier from scratch on top of it.
 - [Hyena Operator](hyena_operator/)
-    - Implementation of Hyena Operator for long range sequences. This paper really interested me and maybe I'll try to build a music generator in style of MusicLM but with this layer instead of self-attention blocks. 
+    - Implementation of Hyena Operator for long range sequences. This paper really interested me and maybe I'll try to build a music generator in style of MusicLM but with this layer instead of self-attention blocks.
+- [Wasserstein GAN](wasserstein_gan/)
+    - Implementation of Wasserstein GAN architecture with gradient penalty.
