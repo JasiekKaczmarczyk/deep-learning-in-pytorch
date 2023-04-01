@@ -3,7 +3,7 @@ Building MNIST Classifier with Neural Ordinary Differential Equations using Torc
 
 ## Citations
 ```bibtex
-@article{chen2018,
+@article{chen2018neural,
     title  = {Neural Ordinary Differential Equations},
     author = {Ricky T. Q. Chen, Yulia Rubanova, Jesse Bettencourt and David Duvenaud},
     year   = {2018},

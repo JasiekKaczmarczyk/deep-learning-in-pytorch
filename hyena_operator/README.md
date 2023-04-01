@@ -13,7 +13,7 @@ y = hyena(x)
 ```
 ## Citations
 ```bibtex
-@article{poli2023,
+@article{poli2023hyena,
     title  = {Hyena Hierarchy: Towards Larger Convolutional Language Models},
     author = {Michael Poli, Stefano Massaroli, Eric Nguyen, Daniel Y. Fu, Tri Dao, Stephen Baccus, Yoshua Bengio, Stefano Ermon and Christopher Ré},
     year   = {2023},

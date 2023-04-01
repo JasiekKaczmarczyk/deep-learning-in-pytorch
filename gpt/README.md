@@ -13,15 +13,15 @@ y = gpt(x)
 ```
 ## Citations
 ```bibtex
-@article{radford2018,
-    title  = {Improving Language Understandingby Generative Pre-Training},
+@article{radford2018improving,
+    title  = {Improving Language Understanding by Generative Pre-Training},
     author = {Alec Radford, Karthik Narasimhan, Tim Salimans and Ilya Sutskever},
     year   = {2018},
     url = {https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf}
 }
 ```
 ```bibtex
-@article{vaswani2017,
+@article{vaswani2017attention,
     title  = {Attention Is All You Need},
     author = {Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser and Illia Polosukhin},
     year   = {2017},

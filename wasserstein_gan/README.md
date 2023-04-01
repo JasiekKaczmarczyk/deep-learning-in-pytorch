@@ -4,7 +4,7 @@ Implementation of Wasserstein GAN architecture along with gradient penalty
 
 ## Citations
 ```bibtex
-@article{arjovsky2017,
+@article{arjovsky2017wasserstein,
     title  = {Wasserstein GAN},
     author = {Martin Arjovsky, Soumith Chintala and Léon Bottou},
     year   = {2017},
@@ -12,7 +12,7 @@ Implementation of Wasserstein GAN architecture along with gradient penalty
 }
 ```
 ```bibtex
-@article{gulrajani2017,
+@article{gulrajani2017improved,
     title  = {Improved Training of Wasserstein GANs},
     author = {Ishaan Gulrajani, Faruk Ahmed, Martin Arjovsky, Vincent Dumoulin and Aaron Courville},
     year   = {2017},

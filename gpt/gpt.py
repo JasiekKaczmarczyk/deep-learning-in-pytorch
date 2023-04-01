@@ -57,7 +57,7 @@ class MultiHeadAttention(nn.Module):
         # attn: (N, heads, query_len, key_len)
         # values: (N, values_len, heads, head_dim)
         # output: (N, query_len, heads, head_dim)
-        out = torch.einsum("nhql,nlhd->nqhd", [attn, v])
+        out = torch.einsum("n h q l, n l h d -> n q h d", [attn, v])
 
         # concatenation of heads
         out = einops.rearrange(out, "n l h d -> n l (h d)")
@@ -82,14 +82,19 @@ class TransformerBlock(nn.Module):
         # expanded dimension for feed forward
         hidden_dim = embedding_size * ffn_expansion
 
-        self.attention = MultiHeadAttention(embedding_size, heads)
+
+
+
         self.ln1 = nn.LayerNorm(embedding_size)
+        self.attention = MultiHeadAttention(embedding_size, heads)
+
+        self.ln2 = nn.LayerNorm(embedding_size)
         self.feed_forward = nn.Sequential(
             nn.Linear(embedding_size, hidden_dim),
             nn.ReLU(),
             nn.Linear(hidden_dim, embedding_size)
         )
-        self.ln2 = nn.LayerNorm(embedding_size)
+        
         self.dropout = nn.Dropout(dropout_rate)
 
     def forward(self, x: torch.Tensor, mask: torch.Tensor = None):

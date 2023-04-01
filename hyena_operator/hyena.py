@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import einops
+import math
 
 # https://github.com/fkodom/fft-conv-pytorch
 from fft_conv_pytorch import fft_conv
@@ -75,21 +76,22 @@ class PositionalEncoding1D(nn.Module):
 
         return pe
 
-class WindowFunc(nn.Module):
-    def __init__(self, order: int):
-        """
-        Window Function
-
-        Args:
-            order (int): hyena order
-        """
+class ExponentialWindowModulation(nn.Module):
+    def __init__(self, embedding_size: int, fast_decay: float = 0.3, slow_decay: float = 1.5, bias: float = 1e-2, shift: float = 0.0):
         super().__init__()
 
-        self.register_buffer("alpha", torch.rand(order, 1, 1))
+        self.shift = shift
+        max_decay = math.log(bias) / fast_decay
+        min_decay = math.log(bias) / slow_decay
+        deltas = torch.linspace(min_decay, max_decay, embedding_size)[None, :, None]
+
+        self.register_buffer("deltas", nn.Parameter(deltas))
 
     def forward(self, x: torch.Tensor):
-        position = torch.arange(x.shape[0], device=x.device)
-        return torch.exp(-self.alpha * position + 0.01)
+        position = torch.linspace(0, 1, x.shape[1], device=x.device)[None, None, :]
+        return torch.exp(-self.deltas.abs() * position) + self.shift
+    
+
 
 class HyenaFilter(nn.Module):
     def __init__(self, embedding_size: int, order: int):
@@ -99,8 +101,6 @@ class HyenaFilter(nn.Module):
         Args:
             embedding_size (int): size of embedding dim
             order (int): number of hyena filters
-            window_scaling_factor (float): scaling factor for window function
-            window_bias (float): bias term for window function
         """
         super().__init__()
 
@@ -108,9 +108,10 @@ class HyenaFilter(nn.Module):
 
         self.positional_encoding = PositionalEncoding1D(embedding_size)
         self.filter_proj = nn.Linear(embedding_size, order*embedding_size)
-        self.window = WindowFunc(order)
+        self.window = ExponentialWindowModulation(embedding_size)
 
     def forward(self, x: torch.Tensor):
+
         # generating positional encodings
         pe = self.positional_encoding(x)
 
@@ -121,9 +122,10 @@ class HyenaFilter(nn.Module):
         h_hat = einops.rearrange(h_hat, "l (o e) -> o e l", o=self.order)
 
         # applying window function
-        h = h_hat * self.window(pe)
+        h = h_hat * self.window(x)
 
         return h
+
 
 class HyenaOperator(nn.Module):
     def __init__(self, embedding_size: int, order: int, causal: bool = False):

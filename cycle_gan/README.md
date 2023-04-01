@@ -3,7 +3,7 @@ Implementation of Cycle GAN trained to generate Monet style painting based on in
 
 ## Citations
 ```bibtex
-@article{zhu2017,
+@article{zhu2017unpaired,
     title  = {Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks},
     author = {Jun-Yan Zhu, Taesung Park, Phillip Isola, and Alexei A. Efros},
     year   = {2017},

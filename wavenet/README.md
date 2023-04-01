@@ -29,7 +29,7 @@ y = model(x)
 ```
 ## Citations
 ```bibtex
-@article{vandenoord2016,
+@article{vandenoord2016wavenet,
     title  = {WaveNet: A Generative Model for Raw Audio},
     author = {Aaron van den Oord, Sander Dieleman, Heiga Zen, Karen Simonyan, Oriol Vinyals, Alex Graves, Nal Kalchbrenner, Andrew Senior and Koray Kavukcuoglu},
     year   = {2016},

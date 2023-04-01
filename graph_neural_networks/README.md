@@ -6,7 +6,7 @@ Network consists of two modules: Message passing module (GAT Layers), and classi
 
 ## Citations
 ```bibtex
-@article{velickovic2017,
+@article{velickovic2017graph,
     title  = {Graph Attention Networks},
     author = {Petar Veličković, Guillem Cucurull, Arantxa Casanova, Adriana Romero, Pietro Liò and Yoshua Bengio},
     year   = {2017},
